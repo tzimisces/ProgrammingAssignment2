@@ -1,11 +1,16 @@
-# This function will create a list which contains the given matrix
+# This function will create a list which contains the given value
 # "x" and methods to set and retrieve:
+#
 # - the original value of "x",
 # - a cached value related to that matrix.
 # 
 # Methods the list provides are set(), get(), getCached() and setCached().
 #
-# @param x The matrix for which the cached value will be stored.
+# The current implementation of getCached() will, if no cached value is
+# set, calculate the inverse of the matrix and assign the calculated
+# value to the cache variable.
+#
+# @param x The value for which the cached value will be stored.
 #
 # @return The list described above.
 makeCacheMatrix <- function(x = matrix()) 
@@ -42,10 +47,11 @@ makeCacheMatrix <- function(x = matrix())
 		cache <<- inverse
 	}
 	
-	# Gets the cached value.
+	# Gets the cached value. This method calls calculate() and provides
+	# it with any parameter provided in the function call.
 	getCached <- function(...)
 	{
-		calculate()
+		calculate(...)
 		cache
 	}
 	
